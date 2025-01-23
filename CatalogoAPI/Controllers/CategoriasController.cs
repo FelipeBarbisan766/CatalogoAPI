@@ -19,7 +19,7 @@ namespace CatalogoAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Categoria>> Get()
         {
-            var categoria = _context.Categorias.ToList();
+            var categoria = _context.Categorias.AsNoTracking().ToList();
             if (categoria is null)
             {
                 return NotFound();
@@ -30,7 +30,7 @@ namespace CatalogoAPI.Controllers
         [HttpGet("{id:int}")]
         public ActionResult<Categoria> Get(int id)
         {
-            var categoria = _context.Categorias.FirstOrDefault(p => p.CategoriaId == id);
+            var categoria = _context.Categorias.AsNoTracking().FirstOrDefault(p => p.CategoriaId == id);
             if (categoria is null)
             {
                 return NotFound();
@@ -41,7 +41,7 @@ namespace CatalogoAPI.Controllers
         [HttpGet("produtos")]
         public ActionResult<IEnumerable<Categoria>> GetCategoriasProdutos()
         {
-            var categoria = _context.Categorias.Include(p => p.Produtos).ToList();
+            var categoria = _context.Categorias.AsNoTracking().Include(p => p.Produtos).ToList();
             if (categoria is null)
             {
                 return NotFound();

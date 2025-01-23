@@ -18,7 +18,7 @@ namespace CatalogoAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Produto>> Get()
         {
-            var produtos = _context.Produtos.ToList();
+            var produtos = _context.Produtos.AsNoTracking().ToList();
             if (produtos is null)
             {
                 return NotFound();
@@ -29,7 +29,7 @@ namespace CatalogoAPI.Controllers
         [HttpGet("{id:int}")]
         public ActionResult<Produto> Get(int id)
         {
-            var produto = _context.Produtos.FirstOrDefault(p=> p.ProdutoId == id);
+            var produto = _context.Produtos.AsNoTracking().FirstOrDefault(p=> p.ProdutoId == id);
             if (produto is null)
             {
                 return NotFound();
