@@ -27,7 +27,7 @@ namespace CatalogoAPI.Controllers
             return categoria;
         }
 
-        [HttpGet("{id:int}")]
+        [HttpGet("{id:int:min(1)}")]
         public ActionResult<Categoria> Get(int id)
         {
             var categoria = _context.Categorias.AsNoTracking().FirstOrDefault(p => p.CategoriaId == id);
